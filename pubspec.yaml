@@ -8,10 +8,13 @@ environment:
   sdk: '>=1.0.0 <2.0.0'
 dependencies:
   browser: any
+  web_components: ">=0.10.1 <0.11.0"
   angular: ">=1.1.0 <2.0.0"
   restpoint:
     git: git://github.com/Adracus/restpoint.git
   duse:
     git: git://github.com/duse-io/duse-dart.git
 transformers:
-- angular
+- angular:
+    html_files:
+      - lib/component/login.html
