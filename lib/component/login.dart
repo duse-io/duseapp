@@ -1,33 +1,30 @@
-library login_component;
+library duseapp.component.login;
 
 import 'dart:html';
 
-import 'package:angular/angular.dart';
-import 'package:duseapp/annotations.dart';
+import 'package:duseapp/global.dart';
 
 import 'package:duse/duse.dart';
-
+import 'package:angular/angular.dart';
 
 @Component(
     selector: 'login',
-    templateUrl: 'login.html')
+    templateUrl: 'packages/duseapp/component/login.html',
+    useShadowDom: false)
 class LoginComponent {
   String username;
   String password;
   DuseClient client;
+  Router router;
   
-  LoginComponent(@duseClient this.client);
+  LoginComponent(@DuseClientConfig() this.client, this.router);
   
   login() {
-    if ([username, password].any(isEmpty)) {
-      return window.alert("Username and/or password missing");
-    }
-    client.login(username, password);
+    if ([username, password].any(isEmpty))
+      return window.alert('Some entry is missing');
+    
+    client.login(username, password).then((ent) {
+      router.go("user", {});
+    }).catchError((e) => window.alert(e.toString()));
   }
-}
-
-
-bool isEmpty(String string) {
-  if (null == string || string.isEmpty) return true;
-  return false;
 }

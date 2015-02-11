@@ -18,3 +18,4 @@ transformers:
 - angular:
     html_files:
       - lib/component/login.html
+      - lib/component/register.html
