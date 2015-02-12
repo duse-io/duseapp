@@ -10,10 +10,10 @@ import 'package:restpoint/restpoint.dart';
 
 
 @Component(
-    selector: 'user',
-    templateUrl: 'packages/duseapp/component/user.html',
+    selector: 'user-dashboard',
+    templateUrl: 'packages/duseapp/component/user_dashboard.html',
     useShadowDom: false)
-class UserComponent {
+class UserDashboardComponent {
   List<Secret> secrets;
   
   Router router;
@@ -22,7 +22,7 @@ class UserComponent {
   User user;
   
   
-  UserComponent(@DuseClientConfig() this.client) {
+  UserDashboardComponent(@DuseClientConfig() this.client) {
     _load();
   }
   
@@ -52,11 +52,12 @@ class User {
 
 
 class Secret {
+  int id;
   String title;
   
-  Secret(this.title);
+  Secret(this.id, this.title);
   
   static Secret parse(Entity secret) {
-    return new Secret(secret.title);
+    return new Secret(secret.id, secret.title);
   }
 }

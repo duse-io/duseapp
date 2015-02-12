@@ -19,8 +19,9 @@ class RegisterComponent {
   String publickey;
   
   DuseClient client;
+  Router router;
   
-  RegisterComponent(@DuseClientConfig() this.client);
+  RegisterComponent(@DuseClientConfig() this.client, this.router);
   
   register() {
     if ([username, email, password, publickey, passwordRepetition].any(isEmpty))
@@ -29,7 +30,7 @@ class RegisterComponent {
       return window.alert('Password needs to be the same as repetition');
     
     client.createUser(username, password, email, publickey).then((ent) {
-      window.alert(ent.toString());
+      router.go("postregister", {});
     }).catchError((e) =>
         window.alert(e.toString()));
   }

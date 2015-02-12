@@ -9,7 +9,7 @@ import 'package:restpoint/restpoint_client_client.dart';
 
 import 'package:duseapp/component/register.dart';
 import 'package:duseapp/component/login.dart';
-import 'package:duseapp/component/user.dart';
+import 'package:duseapp/component/user_dashboard.dart';
 import 'package:duseapp/global.dart';
 
 DuseClient get client {
@@ -28,7 +28,7 @@ class DuseAppModule extends Module {
     bind(RouteInitializerFn, toValue: router);
     bind(RegisterComponent);
     bind(LoginComponent);
-    bind(UserComponent);
+    bind(UserDashboardComponent);
     bind(DuseClient,
         withAnnotation: const DuseClientConfig(),
         toValue: client);
@@ -56,11 +56,18 @@ void router(Router router, RouteViewFactory views) {
     'register': ngRoute(
         path: '/register',
         view: 'view/register.html'),
+    'postregister': ngRoute(
+        path: '/postregister',
+        view: '/view/post_register.html'),
     'login': ngRoute(
         path: '/login',
         view: 'view/login.html'),
-    'user': ngRoute(
-        path: '/user',
-        view: 'view/user.html')
+    'users': ngRoute(
+        path: '/users',
+        mount: {
+          'me': ngRoute(
+              path: '/me',
+              view: 'view/user_dashboard.html')
+        })
   });
 }

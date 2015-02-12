@@ -8,8 +8,9 @@
   <p ng-switch-when="[]">No secrets yet :(</p>
   <div ng-switch-default>
     <p>Your available secrets</p>
-    <ul ng-repeat="secret in secrets">
-      <li>{{secret.title}}</li>
-    </ul>
+    <div ng-repeat="secret in secrets">
+      <p><b>Id: </b>{{secret.id}}</p>
+      <p><b>Title: </b>{{secret.title}}</p>
+    </div>
   </div>
 </div>

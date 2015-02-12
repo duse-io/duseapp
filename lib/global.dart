@@ -1,8 +1,5 @@
 library duseapp.global;
 
-import 'package:duse/duse.dart';
-import 'package:restpoint/restpoint_client_client.dart';
-
 
 class DuseClientConfig {
   const DuseClientConfig();

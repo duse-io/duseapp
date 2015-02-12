@@ -16,16 +16,22 @@ class LoginComponent {
   String password;
   DuseClient client;
   Router router;
+  bool isLoading = false;
   
   LoginComponent(@DuseClientConfig() this.client, this.router);
+  
+  @NgOneWay("button-text")
+  String get buttonText => isLoading ? "Loading..." : "Login";
   
   login() {
     if ([username, password].any(isEmpty))
       return window.alert('Some entry is missing');
     
+    isLoading = true;
     client.login(username, password).then((token) {
       window.localStorage["token"] = token;
-      router.go("user", {});
-    }).catchError((e) => window.alert(e.toString()));
+      router.go("users.me", {});
+    }).catchError((e) => window.alert(e.toString()))
+    .whenComplete(() => isLoading = false);
   }
 }
