@@ -1,3 +1,15 @@
-<h1>User Dashboard</h1>
+<div ng-switch="user">
+  <h1 ng-switch-when="null">Loading...</h1>
+  <h1 ng-switch-default>Hello {{user.username}}</h1>
+</div>
 
-<user></user>
+<div ng-switch="secrets">
+  <p ng-switch-when="null">Loading...</p>
+  <p ng-switch-when="[]">No secrets yet :(</p>
+  <div ng-switch-default>
+    <p>Your available secrets</p>
+    <ul ng-repeat="secret in secrets">
+      <li>{{secret.title}}</li>
+    </ul>
+  </div>
+</div>

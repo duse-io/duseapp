@@ -1,5 +1,7 @@
 library duseapp.component.user;
 
+import 'dart:html';
+
 import 'package:duseapp/global.dart';
 
 import 'package:angular/angular.dart';
@@ -12,7 +14,9 @@ import 'package:restpoint/restpoint.dart';
     templateUrl: 'packages/duseapp/component/user.html',
     useShadowDom: false)
 class UserComponent {
-  List<Secret> secrets = [];
+  List<Secret> secrets;
+  
+  Router router;
   
   DuseClient client;
   User user;
@@ -22,10 +26,17 @@ class UserComponent {
     _load();
   }
   
-  _load() async {
-    user = User.parse(await this.client.getCurrentUser());
-    secrets = (await this.client.listSecrets()).map(Secret.parse).toList();
+  _load() {
+    _loadUser();
+    _loadSecrets();
   }
+  
+  _loadSecrets() =>
+      this.client.listSecrets().then((ents) =>
+          secrets = ents.map(Secret.parse).toList());
+  
+  _loadUser() =>
+      this.client.getCurrentUser().then((ent) => user = User.parse(ent));
 }
 
 class User {

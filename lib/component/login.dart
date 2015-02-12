@@ -23,7 +23,8 @@ class LoginComponent {
     if ([username, password].any(isEmpty))
       return window.alert('Some entry is missing');
     
-    client.login(username, password).then((ent) {
+    client.login(username, password).then((token) {
+      window.localStorage["token"] = token;
       router.go("user", {});
     }).catchError((e) => window.alert(e.toString()));
   }
