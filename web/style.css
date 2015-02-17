@@ -1,0 +1,12 @@
+.dusebranded::after {
+  content: "";
+  background-image: url("images/lock.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;  
+}

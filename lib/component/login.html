@@ -1,11 +1,16 @@
-<form ng-submit="login()">
-  <div class="form-group">
-    <label for="usernameInput">Username</label>
-    <input class="form-control" type="text" id="usernameInput" placeholder="Username" ng-model="username" />
-  </div>
-  <div class="form-group">
-    <label for="passwordInput">Password</label>
-    <input class="form-control" type="password" id="passwordInput" placeholder="Password" ng-model="password" />
-  </div>
-  <input class="btn btn-primary" type="submit" ng-value="button-text" ng-disabled="isLoading"/>
-</form>
+<div class="logincontainer dusebranded">
+  <h1>Login</h1>
+  <form ng-submit="login()">
+    <div class="form-group">
+      <label for="usernameInput">Username</label>
+      <input class="form-control" type="text" id="usernameInput" placeholder="Username" ng-model="username" />
+    </div>
+    <div class="form-group">
+      <label for="passwordInput">Password</label>
+      <input class="form-control" type="password" id="passwordInput" placeholder="Password" ng-model="password" />
+    </div>
+    <button class="btn btn-primary btn-block" type="submit" ng-disabled="isLoading">{{buttonText}}</button>
+  </form>
+  <br />
+  <p>Not registered yet? Register <a href="#/register">here</a></p>
+</div>

@@ -1,21 +1,21 @@
-name: 'duseapp'
+name: duseapp
 version: 0.0.1
-description: >
-  An absolute bare-bones web app.
-#author: <your name> <email@example.com>
-#homepage: https://www.example.com
+description: An absolute bare-bones web app.
 environment:
   sdk: '>=1.0.0 <2.0.0'
 dependencies:
+  angular: '>=1.1.0 <2.0.0'
+  angular_ui: any
   browser: any
-  web_components: ">=0.10.1 <0.11.0"
-  angular: ">=1.1.0 <2.0.0"
-  restpoint:
-    git: git://github.com/Adracus/restpoint.git
+  cipher: any
+  crypto: any
   duse:
     git: git://github.com/duse-io/duse-dart.git
+  restpoint:
+    git: git://github.com/Adracus/restpoint.git
+  web_components: '>=0.10.1 <0.11.0'
 transformers:
 - angular:
     html_files:
-      - lib/component/login.html
-      - lib/component/register.html
+    - lib/component/login.html
+    - lib/component/register.html

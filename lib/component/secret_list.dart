@@ -1,6 +1,6 @@
 library duseapp.component.user;
 
-import 'dart:html';
+import 'dart:html' show window;
 
 import 'package:duseapp/global.dart';
 
@@ -10,19 +10,21 @@ import 'package:restpoint/restpoint.dart';
 
 
 @Component(
-    selector: 'user-dashboard',
-    templateUrl: 'packages/duseapp/component/user_dashboard.html',
+    selector: 'secret-list',
+    templateUrl: 'packages/duseapp/component/secret_list.html',
+    cssUrl: 'packages/duseapp/component/secret_list.css',
     useShadowDom: false)
-class UserDashboardComponent {
+class SecretListComponent {
   List<Secret> secrets;
   
   Router router;
   
   DuseClient client;
   User user;
+  String titleFilter = "";
   
   
-  UserDashboardComponent(@DuseClientConfig() this.client) {
+  SecretListComponent(@DuseClientConfig() this.client) {
     _load();
   }
   
@@ -37,16 +39,24 @@ class UserDashboardComponent {
   
   _loadUser() =>
       this.client.getCurrentUser().then((ent) => user = User.parse(ent));
+  
+  deleteSecret(id) {
+    this.client.deleteSecret(id).then((_) {
+      this.secrets.removeWhere((secret) => secret.id == id);
+      window.alert("Deleted secret $id");
+    }).catchError((e) => window.alert(e));
+  }
 }
 
 class User {
+  int id;
   String username;
   String email;
   
-  User(this.username, this.email);
+  User(this.id, this.username, this.email);
   
   static User parse(Entity user) {
-    return new User(user.username, user.email);
+    return new User(user.id, user.username, user.email);
   }
 }
 

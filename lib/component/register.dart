@@ -20,6 +20,9 @@ class RegisterComponent {
   
   DuseClient client;
   Router router;
+  bool isLoading = false;
+  
+  String get buttonText => isLoading ? "Loading..." : "Register";
   
   RegisterComponent(@DuseClientConfig() this.client, this.router);
   
@@ -29,9 +32,11 @@ class RegisterComponent {
     if (password != passwordRepetition)
       return window.alert('Password needs to be the same as repetition');
     
+    isLoading = true;
     client.createUser(username, password, email, publickey).then((ent) {
       router.go("postregister", {});
     }).catchError((e) =>
-        window.alert(e.toString()));
+        window.alert(e.toString())
+    ).whenComplete(() => isLoading = false);
   }
 }

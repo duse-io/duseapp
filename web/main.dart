@@ -9,7 +9,9 @@ import 'package:restpoint/restpoint_client_client.dart';
 
 import 'package:duseapp/component/register.dart';
 import 'package:duseapp/component/login.dart';
-import 'package:duseapp/component/user_dashboard.dart';
+import 'package:duseapp/component/secret_list.dart';
+import 'package:duseapp/component/secret.dart';
+import 'package:duseapp/component/secret_form.dart';
 import 'package:duseapp/global.dart';
 
 DuseClient get client {
@@ -28,7 +30,9 @@ class DuseAppModule extends Module {
     bind(RouteInitializerFn, toValue: router);
     bind(RegisterComponent);
     bind(LoginComponent);
-    bind(UserDashboardComponent);
+    bind(SecretListComponent);
+    bind(SecretComponent);
+    bind(SecretFormComponent);
     bind(DuseClient,
         withAnnotation: const DuseClientConfig(),
         toValue: client);
@@ -62,6 +66,19 @@ void router(Router router, RouteViewFactory views) {
     'login': ngRoute(
         path: '/login',
         view: 'view/login.html'),
+    'secrets': ngRoute(
+        path: '/secrets',
+        mount: {
+          'create': ngRoute(
+              path: '/create',
+              view: 'view/secret_form.html'),
+          'single': ngRoute(
+              path: '/:secretId',
+              view: 'view/secret_single.html'),
+          'all': ngRoute(
+              path: '/all',
+              view: 'view/secret_list.html')
+        }),
     'users': ngRoute(
         path: '/users',
         mount: {
