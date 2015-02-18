@@ -6,24 +6,27 @@
     <div class="col-md-9">
       <div class="form-group">
         <label for="usernameInput">Username</label>
-        <input type="text" class="form-control" id="usernameInput" placeholder="{{user.username}}" />
+        <input type="text" ng-model="username"
+          class="form-control" id="usernameInput" placeholder="{{user.username}}" />
       </div>
       <div class="form-group">
         <label for="emailInput">Email</label>
-        <input type="text" class="form-control" id="emailInput" placeholder="{{user.email}}">
+        <input type="text" ng-model="email"
+          class="form-control" id="emailInput" placeholder="{{user.email}}">
       </div>
       <div class="form-group">
-        <label for="oldPasswordInput">Old Password</label>
-        <input type="text" class="form-control" id="oldPasswordInput" placeholder="Old password">
+        <label for="oldPasswordInput">Password</label>
+        <input type="password" ng-model="password"
+          class="form-control" id="oldPasswordInput" placeholder="Old password">
       </div>
       <div class="form-group">
-        <label for="newPasswordInput">New Password</label>
-        <input type="text" class="form-control" id="newPasswordInput" placeholder="New password">
-        <input type="text" class="form-control" id="newPasswordRepetition" placeholder="Repeat password">
+        <label for="newPasswordInput">[Enter to change] New Password</label>
+        <input type="password" ng-model="newPassword"
+          class="form-control" id="newPasswordInput" placeholder="New password">
+        <input type="password" ng-model="newPasswordRepeat"
+          class="form-control" placeholder="Repeat password">
       </div>
-      <a href="#/users/{{user.id}}" class="btn btn-warning">Submit</a>
+      <a class="btn btn-warning" ng-click="update()">Submit</a>
     </div>
-  </div>
-  <div class="row">
   </div>
 </div>
