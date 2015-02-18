@@ -14,6 +14,7 @@ import 'package:duseapp/component/secret_list.dart';
 import 'package:duseapp/component/secret.dart';
 import 'package:duseapp/component/secret_form.dart';
 import 'package:duseapp/component/load_button.dart';
+import 'package:duseapp/component/user.dart';
 import 'package:duseapp/global.dart';
 
 DuseClient get client {
@@ -37,6 +38,7 @@ class DuseAppModule extends Module {
     bind(SecretComponent);
     bind(SecretFormComponent);
     bind(LoadButtonComponent);
+    bind(UserComponent);
     bind(DuseClient,
         withAnnotation: const DuseClientConfig(),
         toValue: client);
@@ -86,9 +88,9 @@ void router(Router router, RouteViewFactory views) {
     'users': ngRoute(
         path: '/users',
         mount: {
-          'me': ngRoute(
-              path: '/me',
-              view: 'view/user_dashboard.html')
+          'single': ngRoute(
+              path: '/:userId',
+              view: 'view/user_single.html')
         })
   });
 }
