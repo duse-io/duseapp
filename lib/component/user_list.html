@@ -1,11 +1,16 @@
-<div class="media" ng-if="users != null" ng-repeat="user in users">
-  <div class="media-left">
-    <a href="#/users/{{user.id}}">
-      <img class="media-object img-rounded" src="{{user.gravatarUrl}}" alt="{{user.username}}">
-    </a>
+<div ng-if="users != null">
+  <div class="list-row">
+    <input type="text" class="form-control" placeholder="Username" ng-model="usernameFilter"/>
   </div>
-  <div class="media-body">
-    <a href="#/users/{{user.id}}"><h4 class="media-heading">{{user.username}}</h4></a>
-    {{user.email}}
+  <div class="media list-row" ng-repeat="user in users | filter:{username:usernameFilter}">
+    <div class="media-left">
+      <a href="#/users/{{user.id}}">
+        <img class="media-object img-rounded" src="{{user.gravatarUrl}}" alt="{{user.username}}">
+      </a>
+    </div>
+    <div class="media-body">
+      <a href="#/users/{{user.id}}"><h4 class="media-heading">{{user.username}}</h4></a>
+      {{user.email}}
+    </div>
   </div>
 </div>

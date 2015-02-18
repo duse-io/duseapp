@@ -15,6 +15,7 @@ class UserListComponent implements AttachAware {
   @NgTwoWay("users")
   List<User> users;
   DuseClient client;
+  String usernameFilter = "";
   
   UserListComponent(@DuseClientConfig() this.client);
   
