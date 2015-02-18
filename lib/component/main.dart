@@ -1,5 +1,7 @@
 library duseapp.component.main;
 
+import 'dart:html' show window;
+
 import 'package:angular/angular.dart';
 import 'package:duse/duse.dart';
 
@@ -31,4 +33,12 @@ class MainComponent implements ScopeAware, AttachAware {
       user = User.parse(ent);
     });
   }
+  
+  void logout() {
+    window.localStorage.remove("token");
+    this.user = null;
+    //this.client.logout();
+  }
+  
+  bool get isLoggedIn => user != null;
 }

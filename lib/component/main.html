@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <div class="navbar-header">
       <a class="navbar-brand" href="#/">
-        <img alt="Duse" style="margin-top: -5px;" src="images/lock.svg" width="30" height="30">
+        <img alt="Duse" class="pullup" src="images/lock.svg" width="30" height="30">
       </a>
       <button type="button" class="navbar-toggle collapsed"
         data-toggle="collapse" data-target="#navbar"
@@ -17,6 +17,18 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li><a href="#/secrets/all">Secrets</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right" ng-if="isLoggedIn">
+        <li>
+          <a href="#/login" ng-click="logout()">
+            <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li>
+          <a class="navbar-brand pullup" href="#/users/{{user.id}}">
+            <img class="img-rounded" src="{{user.sizedGravatarUrl(32)}}" width="32" height="32">
+          </a>
+        </li>
       </ul>
     </div><!--/.nav-collapse -->
   </div><!--/.container-fluid -->

@@ -1,4 +1,13 @@
 <div ng-if="userIsPresent">
-  <h1>{{user.username}} <button class="btn btn-warning" ng-if="isCurrentUser">Edit</button></h1>
-  <h3>{{user.email}}</h3>
+  <div class="row">
+    <div class="col-md-3">
+      <img src="{{user.sizedGravatarUrl(255)}}" alt="{{user.username}}">
+    </div>
+    <div class="col-md-9">
+      <h1>{{user.username}} <button class="btn btn-warning" ng-if="isCurrentUser">Edit</button></h1>
+      <a href="mailto: {{user.email}}"><h3>{{user.email}}</h3></a>
+    </div>
+  </div>
+  <div class="row">
+  </div>
 </div>

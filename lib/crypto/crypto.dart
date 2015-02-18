@@ -4,9 +4,23 @@ import 'dart:html' show window;
 import 'dart:math' show min;
 import 'dart:typed_data' show Uint8List;
 
-import 'package:crypto/crypto.dart' show CryptoUtils;
+import 'package:crypto/crypto.dart' show CryptoUtils, MD5;
 import 'package:cipher/cipher.dart';
 import 'package:cipher/impl/client.dart';
+
+String buildGravatarHash(String mail) {
+  mail = mail.trim().toLowerCase();
+  var md5 = new MD5();
+  md5.add(mail.codeUnits);
+  return md5.close().map(byteToHex)
+                    .reduce((s1, s2) => s1 + s2)
+                    .toLowerCase();
+}
+
+String byteToHex(int byte) {
+  if (byte < 0 || byte > 255) throw new RangeError.range(byte, 0, 255);
+  return byte.toRadixString(16).padLeft(2, "0");
+}
 
 Uint8List _s2osp(String str, [int length]) {
   if (null == length) length = str.length;

@@ -17,11 +17,16 @@ class UserComponent implements AttachAware {
   
   User user;
   
+  void set id(id) {
+    if (id is String) id = int.parse(this.provider.parameters["userId"]);
+    if (id is! int) throw new ArgumentError.value(id);
+    this.client.getUser(id).then((entity) => user = User.parse(entity));
+  }
+  
   UserComponent(this.provider, @DuseClientConfig() this.client, this.main);
   
   void attach() {
-    var id = int.parse(this.provider.parameters["userId"]);
-    this.client.getUser(id).then((entity) => user = User.parse(entity));
+    this.id = this.provider.parameters["userId"];
   }
   
   bool get userIsPresent => user != null;

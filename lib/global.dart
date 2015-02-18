@@ -2,6 +2,8 @@ library duseapp.global;
 
 import 'package:restpoint/restpoint.dart';
 
+import 'package:duseapp/crypto/crypto.dart';
+
 class DuseClientConfig {
   const DuseClientConfig();
 }
@@ -31,8 +33,16 @@ class User {
   int id;
   String username;
   String email;
+  String gravatarUrl;
   
-  User(this.id, this.username, this.email);
+  User(this.id, this.username, this.email) {
+    gravatarUrl = "http://www.gravatar.com/avatar/${buildGravatarHash(email)}";
+  }
+  
+  String sizedGravatarUrl(int size) {
+    if (size < 1 || size > 2048) throw new RangeError.range(size, 1, 2048);
+    return "$gravatarUrl?s=$size";
+  }
   
   static User parse(Entity entity) =>
       new User(entity.id, entity.username, entity.email);
