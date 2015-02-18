@@ -10,23 +10,34 @@ import 'package:duseapp/component/main.dart';
     selector: 'user',
     templateUrl: 'packages/duseapp/component/user.html',
     useShadowDom: false)
-class UserComponent implements AttachAware {
+class UserComponent {
   RouteProvider provider;
   DuseClient client;
   MainComponent main;
   
   User user;
   
-  void set id(id) {
-    if (id is String) id = int.parse(this.provider.parameters["userId"]);
-    if (id is! int) throw new ArgumentError.value(id);
-    this.client.getUser(id).then((entity) => user = User.parse(entity));
-  }
+  String error;
   
   UserComponent(this.provider, @DuseClientConfig() this.client, this.main);
   
-  void attach() {
-    this.id = this.provider.parameters["userId"];
+  @NgAttr("user-id")
+  void set id(id) {
+    if (null == id) id = this.provider.parameters["userId"];
+    if (id is String) {
+      try {
+        id = int.parse(id);
+      } on FormatException catch (e) {
+        error = "Malformed user id $id";
+        user = null;
+        return;
+      }
+    }
+    if (id is! int) throw new ArgumentError.value(id);
+    this.client.getUser(id)
+      .then((entity) => user = User.parse(entity))
+      .catchError((e) =>
+          error = "Could not get the specified user");
   }
   
   bool get userIsPresent => user != null;

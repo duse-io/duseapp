@@ -1,0 +1,11 @@
+<div class="media" ng-if="users != null" ng-repeat="user in users">
+  <div class="media-left">
+    <a href="#/users/{{user.id}}">
+      <img class="media-object img-rounded" src="{{user.gravatarUrl}}" alt="{{user.username}}">
+    </a>
+  </div>
+  <div class="media-body">
+    <a href="#/users/{{user.id}}"><h4 class="media-heading">{{user.username}}</h4></a>
+    {{user.email}}
+  </div>
+</div>

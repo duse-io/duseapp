@@ -16,6 +16,7 @@ import 'package:duseapp/component/secret_form.dart';
 import 'package:duseapp/component/load_button.dart';
 import 'package:duseapp/component/user.dart';
 import 'package:duseapp/component/user_form.dart';
+import 'package:duseapp/component/user_list.dart';
 import 'package:duseapp/global.dart';
 
 DuseClient get client {
@@ -41,6 +42,7 @@ class DuseAppModule extends Module {
     bind(LoadButtonComponent);
     bind(UserComponent);
     bind(UserFormComponent);
+    bind(UserListComponent);
     bind(DuseClient,
         withAnnotation: const DuseClientConfig(),
         toValue: client);
@@ -93,6 +95,9 @@ void router(Router router, RouteViewFactory views) {
           'edit': ngRoute(
               path: '/:userId/edit',
               view: 'view/user_form.html'),
+          'all': ngRoute(
+              path: '/all',
+              view: 'view/user_list.html'),
           'single': ngRoute(
               path: '/:userId',
               view: 'view/user_single.html')

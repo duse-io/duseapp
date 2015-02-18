@@ -15,12 +15,16 @@ class MainComponent implements AttachAware {
   User user;
   
   DuseClient client;
+  
+  RouteProvider provider;
     
-  MainComponent(@DuseClientConfig() this.client);
+  MainComponent(@DuseClientConfig() this.client, this.provider);
   
   void attach() {
     if (client.isLoggedIn) fetchUser();
   }
+  
+  Map<String, String> get parameters => provider.parameters;
   
   void fetchUser() {
     client.getCurrentUser().then((ent) {
