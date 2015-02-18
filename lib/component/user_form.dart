@@ -1,19 +1,17 @@
-library duseapp.component.user_component;
+library duseapp.component.user_form_component;
 
 import 'package:angular/angular.dart';
 import 'package:duse/duse.dart';
 
 import 'package:duseapp/global.dart';
-import 'package:duseapp/component/main.dart';
 
 @Component(
-    selector: 'user',
-    templateUrl: 'packages/duseapp/component/user.html',
+    selector: 'user-form',
+    templateUrl: 'packages/duseapp/component/user_form.html',
     useShadowDom: false)
-class UserComponent implements AttachAware {
+class UserFormComponent implements AttachAware {
   RouteProvider provider;
   DuseClient client;
-  MainComponent main;
   
   User user;
   
@@ -23,16 +21,11 @@ class UserComponent implements AttachAware {
     this.client.getUser(id).then((entity) => user = User.parse(entity));
   }
   
-  UserComponent(this.provider, @DuseClientConfig() this.client, this.main);
+  UserFormComponent(this.provider, @DuseClientConfig() this.client);
   
   void attach() {
     this.id = this.provider.parameters["userId"];
   }
   
   bool get userIsPresent => user != null;
-  
-  bool get isCurrentUser {
-    if ([main.user, user].any((obj) => null == obj)) return false;
-    return user.id == main.user.id;
-  }
 }

@@ -1,10 +1,12 @@
 <div ng-if="userIsPresent">
   <div class="row">
     <div class="col-md-3">
-      <img src="{{user.sizedGravatarUrl(255)}}" alt="{{user.username}}">
+      <img class="img-rounded" src="{{user.sizedGravatarUrl(255)}}" alt="{{user.username}}">
     </div>
     <div class="col-md-9">
-      <h1>{{user.username}} <button class="btn btn-warning" ng-if="isCurrentUser">Edit</button></h1>
+      <h1>{{user.username}} <a href="#/users/{{user.id}}/edit" class="btn btn-warning" ng-if="isCurrentUser">
+        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit
+      </a></h1>
       <a href="mailto: {{user.email}}"><h3>{{user.email}}</h3></a>
     </div>
   </div>

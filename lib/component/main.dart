@@ -11,18 +11,12 @@ import 'package:duseapp/global.dart';
     selector: 'main',
     templateUrl: 'packages/duseapp/component/main.html',
     useShadowDom: false)
-class MainComponent implements ScopeAware, AttachAware {
+class MainComponent implements AttachAware {
   User user;
   
   DuseClient client;
     
   MainComponent(@DuseClientConfig() this.client);
-  
-  void set scope(Scope scope) {
-    scope.on("login").listen((event) {
-      if (null == user) fetchUser();
-    });
-  }
   
   void attach() {
     if (client.isLoggedIn) fetchUser();
@@ -37,7 +31,7 @@ class MainComponent implements ScopeAware, AttachAware {
   void logout() {
     window.localStorage.remove("token");
     this.user = null;
-    //this.client.logout();
+    this.client.logout();
   }
   
   bool get isLoggedIn => user != null;

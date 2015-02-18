@@ -1,0 +1,29 @@
+<div ng-if="userIsPresent">
+  <div class="row">
+    <div class="col-md-3">
+      <img class="img-rounded" src="{{user.sizedGravatarUrl(255)}}" alt="{{user.username}}">
+    </div>
+    <div class="col-md-9">
+      <div class="form-group">
+        <label for="usernameInput">Username</label>
+        <input type="text" class="form-control" id="usernameInput" placeholder="{{user.username}}" />
+      </div>
+      <div class="form-group">
+        <label for="emailInput">Email</label>
+        <input type="text" class="form-control" id="emailInput" placeholder="{{user.email}}">
+      </div>
+      <div class="form-group">
+        <label for="oldPasswordInput">Old Password</label>
+        <input type="text" class="form-control" id="oldPasswordInput" placeholder="Old password">
+      </div>
+      <div class="form-group">
+        <label for="newPasswordInput">New Password</label>
+        <input type="text" class="form-control" id="newPasswordInput" placeholder="New password">
+        <input type="text" class="form-control" id="newPasswordRepetition" placeholder="Repeat password">
+      </div>
+      <a href="#/users/{{user.id}}" class="btn btn-warning">Submit</a>
+    </div>
+  </div>
+  <div class="row">
+  </div>
+</div>
