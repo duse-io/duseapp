@@ -6,7 +6,7 @@ import 'dart:async' show Future;
 import 'package:angular/angular.dart';
 import 'package:duse/duse.dart';
 
-import 'package:duseapp/component/secret_list.dart';
+import 'package:duseapp/crypto/crypto.dart';
 import 'package:duseapp/global.dart';
 
 @Component(

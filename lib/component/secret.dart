@@ -7,21 +7,24 @@ import 'package:duse/duse.dart';
 import 'package:angular/angular.dart';
 
 import 'package:duseapp/global.dart';
+import 'package:duseapp/crypto/crypto.dart';
 
 @Component(
     selector: 'secret',
     templateUrl: 'packages/duseapp/component/secret.html',
     useShadowDom: false)
-class SecretComponent {
+class SecretComponent implements AttachAware {
   Secret secret;
   
   DuseClient client;
   
   String password;
   String privatePem;
+  RouteProvider routeProvider;
   
-  SecretComponent(@DuseClientConfig() this.client,
-                      RouteProvider routeProvider) {
+  SecretComponent(@DuseClientConfig() this.client, this.routeProvider);
+  
+  void attach() {
     var id = int.parse(routeProvider.parameters["secretId"]);
     this.client.getSecret(id).then((entity) => secret = Secret.parse(entity));
   }
@@ -48,27 +51,4 @@ class SecretComponent {
   bool get isPrivateKeyPresent {
     return window.localStorage.containsKey("private_key");
   }
-}
-
-class Secret {
-  int id;
-  String title;
-  List<User> users;
-  
-  Secret(this.id, this.title, this.users);
-  
-  static Secret parse(Entity entity) {
-    return new Secret(entity.id,
-                      entity.title,
-                      entity.users.map(User.parse).toList());
-  }
-}
-
-class User {
-  int id;
-  String username;
-  
-  User(this.id, this.username);
-  
-  static User parse(Entity entity) => new User(entity.id, entity.username);
 }

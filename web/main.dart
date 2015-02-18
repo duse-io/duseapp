@@ -7,11 +7,13 @@ import 'package:angular/application_factory.dart';
 import 'package:duse/duse.dart';
 import 'package:restpoint/restpoint_client_client.dart';
 
+import 'package:duseapp/component/main.dart';
 import 'package:duseapp/component/register.dart';
 import 'package:duseapp/component/login.dart';
 import 'package:duseapp/component/secret_list.dart';
 import 'package:duseapp/component/secret.dart';
 import 'package:duseapp/component/secret_form.dart';
+import 'package:duseapp/component/load_button.dart';
 import 'package:duseapp/global.dart';
 
 DuseClient get client {
@@ -28,11 +30,13 @@ DuseClient get client {
 class DuseAppModule extends Module {
   DuseAppModule() {
     bind(RouteInitializerFn, toValue: router);
+    bind(MainComponent);
     bind(RegisterComponent);
     bind(LoginComponent);
     bind(SecretListComponent);
     bind(SecretComponent);
     bind(SecretFormComponent);
+    bind(LoadButtonComponent);
     bind(DuseClient,
         withAnnotation: const DuseClientConfig(),
         toValue: client);

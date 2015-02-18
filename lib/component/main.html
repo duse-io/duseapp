@@ -1,0 +1,34 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#/">
+        <img alt="Duse" style="margin-top: -5px;" src="images/lock.svg" width="30" height="30">
+      </a>
+      <button type="button" class="navbar-toggle collapsed"
+        data-toggle="collapse" data-target="#navbar"
+        aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Duse</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li><a href="#/secrets/all">Secrets</a></li>
+      </ul>
+    </div><!--/.nav-collapse -->
+    <p ng-if="user != null" class="navbar-text navbar-right">{{user.username}}</p>
+  </div><!--/.container-fluid -->
+</nav>
+
+<div class="container">
+  <ng-view></ng-view>
+</div>
+
+<footer>
+  <div class="container">
+    <p class="text-muted">The Duse Secret Sharing Platform</p>
+  </div>
+</footer>
