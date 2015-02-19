@@ -5,10 +5,9 @@ environment:
   sdk: '>=1.0.0 <2.0.0'
 dependencies:
   angular: '>=1.1.0 <2.0.0'
-  angular_ui: any
-  browser: any
-  cipher: any
-  crypto: any
+  browser: ">=0.10.0+2 <0.11.0"
+  cipher: ">=0.7.1 <0.8.0"
+  crypto: ">=0.9.0 <0.10.0"
   duse:
     git: git://github.com/duse-io/duse-dart.git
   restpoint:
@@ -20,3 +19,10 @@ transformers:
     html_files:
     - lib/component/login.html
     - lib/component/register.html
+    - lib/component/main.html
+    - lib/component/secret.html
+    - lib/component/secret_form.html
+    - lib/component/secret_list.html
+    - lib/component/user.html
+    - lib/component/user_form.html
+    - lib/component/user_list.html
