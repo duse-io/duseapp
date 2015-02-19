@@ -21,6 +21,8 @@ import 'package:duseapp/component/user_list.dart';
 import 'package:duseapp/global.dart';
 
 DuseClient get client {
+  var url = const String.fromEnvironment("DUSE_URL",
+      defaultValue: "https://duse.herokuapp.com/v1");
   var _client = new DuseClient(
     Uri.parse("https://duse.herokuapp.com/v1"),
     new ClientClientFactory());
