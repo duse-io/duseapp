@@ -18,4 +18,11 @@ class Alert {
   const Alert.danger(String content) : this._(_TYPE_DANGER, content);
   
   const Alert.info(String content) : this._(_TYPE_INFO, content);
+  
+  bool operator==(other) {
+    if (null == other || other is! Alert) return false;
+    return other.content == this.content && other.type == this.type;
+  }
+  
+  int get hashCode => (type + content).hashCode;
 }

@@ -2,7 +2,6 @@ library duseapp.component.secret;
 
 import 'dart:html' show window;
 
-import 'package:restpoint/restpoint.dart';
 import 'package:duse/duse.dart';
 import 'package:angular/angular.dart';
 
@@ -13,10 +12,11 @@ import 'package:duseapp/crypto/crypto.dart';
     selector: 'secret',
     templateUrl: 'packages/duseapp/component/secret.html',
     useShadowDom: false)
-class SecretComponent implements AttachAware {
+class SecretComponent implements AttachAware, ScopeAware {
   Secret secret;
   
   DuseClient client;
+  Scope scope;
   
   String password;
   String privatePem;
@@ -31,9 +31,10 @@ class SecretComponent implements AttachAware {
   
   void decrypt() {
     this.client.privateKey = this.privateKey;
+    scope.emit("load", true);
     this.client.getDecodedSecret(secret.id).then((secret) {
       window.alert(secret);
-    });
+    }).whenComplete(() => scope.emit("load", false));
   }
   
   void reset() {

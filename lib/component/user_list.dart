@@ -6,16 +6,18 @@ import 'package:angular/angular.dart';
 import 'package:duse/duse.dart';
 
 import 'package:duseapp/global.dart';
+import 'package:duseapp/model/alert.dart';
 
 @Component(
     selector: 'user-list',
     templateUrl: 'packages/duseapp/component/user_list.html',
     useShadowDom: false)
-class UserListComponent implements AttachAware {
+class UserListComponent implements AttachAware, ScopeAware {
   @NgTwoWay("users")
   List<User> users;
   DuseClient client;
   String usernameFilter = "";
+  Scope scope;
   
   UserListComponent(@DuseClientConfig() this.client);
   
@@ -39,7 +41,11 @@ class UserListComponent implements AttachAware {
   }
   
    void _loadAllUsers() {
-    client.listUsers().then((List users) =>
-        this.users = users.map(User.parse).toList());
+     scope.emit("load", true);
+     client.listUsers().then((List users) =>
+        this.users = users.map(User.parse).toList())
+           .catchError((e) =>
+               scope.emit("alert", new Alert.warning("Could not load users")))
+           .whenComplete(() => scope.emit("load", false));
   }
 }

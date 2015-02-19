@@ -4,12 +4,13 @@ import 'package:angular/angular.dart';
 import 'package:duse/duse.dart';
 
 import 'package:duseapp/global.dart';
+import 'package:duseapp/model/alert.dart';
 
 @Component(
     selector: 'user-form',
     templateUrl: 'packages/duseapp/component/user_form.html',
     useShadowDom: false)
-class UserFormComponent implements AttachAware {
+class UserFormComponent implements AttachAware, ScopeAware {
   RouteProvider provider;
   DuseClient client;
   
@@ -21,6 +22,7 @@ class UserFormComponent implements AttachAware {
   Router router;
   
   User user;
+  Scope scope;
   
   void set id(id) {
     if (id is String) id = int.parse(this.provider.parameters["userId"]);
@@ -45,9 +47,12 @@ class UserFormComponent implements AttachAware {
       if (newPassword == newPasswordRepeat) body["password"] = newPassword;
     }
     
+    scope.emit("load", true);
     this.client.updateUser(user.id, body).then((ent) {
       router.go("users.single", {"userId": user.id});
-    }).catchError((e) => print(e));
+    }).catchError((e) {
+      scope.emit("alert", new Alert.warning("Could not update the user"));
+    }).whenComplete(() => scope.emit("load", false));
   }
   
   bool get userIsPresent => user != null;

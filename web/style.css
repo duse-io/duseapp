@@ -41,3 +41,16 @@ footer {
   padding: 0 0 10px;
   border-bottom: 1px solid #ddd;
 }
+
+.disabled {
+  pointer-events: none;
+  opacity: 0.4;
+}
+
+.absolute-centered {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  /* bring your own prefixes */
+  transform: translate(-50%, -50%);
+}

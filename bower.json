@@ -1,0 +1,28 @@
+{
+  "name": "duseapp",
+  "version": "0.0.0",
+  "homepage": "https://github.com/duse-io/duseapp",
+  "authors": [
+    "Adracus <adracus@gmail.com>"
+  ],
+  "description": "The single page app for duse",
+  "main": "web/index.html",
+  "keywords": [
+    "dart",
+    "web",
+    "duse"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "web",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "spinkit": "~1.0.1"
+  }
+}

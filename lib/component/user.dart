@@ -3,6 +3,7 @@ library duseapp.component.user_component;
 import 'package:angular/angular.dart';
 import 'package:duse/duse.dart';
 
+import 'package:duseapp/model/alert.dart';
 import 'package:duseapp/global.dart';
 import 'package:duseapp/component/main.dart';
 
@@ -10,14 +11,13 @@ import 'package:duseapp/component/main.dart';
     selector: 'user',
     templateUrl: 'packages/duseapp/component/user.html',
     useShadowDom: false)
-class UserComponent {
+class UserComponent implements ScopeAware {
   RouteProvider provider;
   DuseClient client;
   MainComponent main;
   
   User user;
-  
-  String error;
+  Scope scope;
   
   UserComponent(this.provider, @DuseClientConfig() this.client, this.main);
   
@@ -28,16 +28,18 @@ class UserComponent {
       try {
         id = int.parse(id);
       } on FormatException catch (e) {
-        error = "Malformed user id $id";
+        scope.emit("alert", new Alert.warning("Malformed user id $id"));
         user = null;
         return;
       }
     }
     if (id is! int) throw new ArgumentError.value(id);
+    scope.emit("load", true);
     this.client.getUser(id)
       .then((entity) => user = User.parse(entity))
       .catchError((e) =>
-          error = "Could not get the specified user");
+          scope.emit("alert", new Alert.danger("Could not get the specified user")))
+      .whenComplete(() => scope.emit("load", false));
   }
   
   bool get userIsPresent => user != null;

@@ -3,6 +3,7 @@ library duseapp.component.register;
 import 'dart:html';
 
 import 'package:duseapp/global.dart';
+import 'package:duseapp/model/alert.dart';
 
 import 'package:angular/angular.dart';
 import 'package:duse/duse.dart';
@@ -11,7 +12,7 @@ import 'package:duse/duse.dart';
     selector: 'register',
     templateUrl: 'packages/duseapp/component/register.html',
     useShadowDom: false)
-class RegisterComponent {
+class RegisterComponent implements ScopeAware {
   String username;
   String email;
   String password;
@@ -20,9 +21,7 @@ class RegisterComponent {
   
   DuseClient client;
   Router router;
-  bool isLoading = false;
-  
-  String get buttonText => isLoading ? "Loading..." : "Register";
+  Scope scope;
   
   RegisterComponent(@DuseClientConfig() this.client, this.router);
   
@@ -32,11 +31,11 @@ class RegisterComponent {
     if (password != passwordRepetition)
       return window.alert('Password needs to be the same as repetition');
     
-    isLoading = true;
+    scope.emit("load", true);
     client.createUser(username, password, email, publickey).then((ent) {
       router.go("postregister", {});
     }).catchError((e) =>
-        window.alert(e.toString())
-    ).whenComplete(() => isLoading = false);
+        scope.emit("alert", new Alert.warning("Could not register"))
+    ).whenComplete(() => scope.emit("load", false));
   }
 }
