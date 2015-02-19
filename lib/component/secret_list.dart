@@ -23,6 +23,7 @@ class SecretListComponent implements ScopeAware {
   User user;
   String titleFilter = "";
   Scope scope;
+  Secret secret;
   
   
   SecretListComponent(@DuseClientConfig() this.client) {
@@ -47,10 +48,15 @@ class SecretListComponent implements ScopeAware {
   _loadUser() =>
       this.client.getCurrentUser().then((ent) => user = User.parse(ent));
   
-  deleteSecret(Secret secret) {
+  selectSecret(Secret secret) {
+    this.secret = secret;
+  }
+  
+  deleteSecret() {
     scope.emit("load", true);
     this.client.deleteSecret(secret.id).then((_) {
       this.secrets.remove(secret);
+      this.secret = null;
     }).catchError((e) {
       scope.emit("alert", new Alert.warning("Could not delete secret"));
     }).whenComplete(() => scope.emit("load", false));
