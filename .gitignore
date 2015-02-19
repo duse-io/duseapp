@@ -1,4 +1,5 @@
 bower_components/
+node_modules/
 .buildlog
 .DS_Store
 .idea

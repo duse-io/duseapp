@@ -1,0 +1,27 @@
+{
+  "name": "duseapp",
+  "version": "0.0.1",
+  "description": "The webapp for duse",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/duse-io/duseapp.git"
+  },
+  "scripts": {
+    "postinstall": "./node_modules/bower/bin/bower install"
+  },
+  "keywords": [
+    "duse",
+    "encryption",
+    "angular",
+    "dart"
+  ],
+  "author": "Axel Christ <adracus@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/duse-io/duseapp/issues"
+  },
+  "homepage": "https://github.com/duse-io/duseapp",
+  "dependencies": {
+    "bower": "^1.3.12"
+  }
+}
