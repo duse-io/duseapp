@@ -5,7 +5,7 @@
   "env": {
     "BUILDPACK_URL": "https://github.com/igrigorik/heroku-buildpack-dart",
     "DART_SDK_URL": "https://storage.googleapis.com/dart-archive/channels/stable/release/42828/sdk/dartsdk-linux-x64-release.zip",
-    "DART_BUILD_CMD": "pub build --mode=release",
+    "DART_BUILD_CMD": "/app/dart-sdk/bin/pub build --mode=release",
     "DUSE_URL": {
       "description": "Url pointing to your Duse api instance"
     }
