@@ -14,7 +14,6 @@ import 'package:duseapp/component/login.dart';
 import 'package:duseapp/component/secret_list.dart';
 import 'package:duseapp/component/secret.dart';
 import 'package:duseapp/component/secret_form.dart';
-import 'package:duseapp/component/load_button.dart';
 import 'package:duseapp/component/user.dart';
 import 'package:duseapp/component/user_form.dart';
 import 'package:duseapp/component/user_list.dart';
@@ -42,7 +41,6 @@ class DuseAppModule extends Module {
     bind(SecretListComponent);
     bind(SecretComponent);
     bind(SecretFormComponent);
-    bind(LoadButtonComponent);
     bind(UserComponent);
     bind(UserFormComponent);
     bind(UserListComponent);

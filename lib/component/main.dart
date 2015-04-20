@@ -13,8 +13,6 @@ import 'package:duseapp/global.dart';
     templateUrl: 'packages/duseapp/component/main.html',
     useShadowDom: false)
 class MainComponent implements AttachAware, ScopeAware {
-  static const List<String> _WHITELIST_ROUTES =
-      const ["/login", "/register", "/post_register"];
   
   User user;
   
@@ -40,8 +38,7 @@ class MainComponent implements AttachAware, ScopeAware {
     });
   }
     
-  MainComponent(@DuseClientConfig() this.client, this.provider, this.router) {
-  }
+  MainComponent(@DuseClientConfig() this.client, this.provider, this.router);
   
   void dismiss(Alert alert) {
     alerts.remove(alert);

@@ -9,11 +9,18 @@ dependencies:
   cipher: ">=0.7.1 <0.8.0"
   crypto: ">=0.9.0 <0.10.0"
   duse:
-    git: git://github.com/duse-io/duse-dart.git
+    git:
+      url: git://github.com/duse-io/duse-dart.git
+      ref: 9ae31288603e8e943555b10edea7a7ef1e6b0eed
   restpoint:
-    git: git://github.com/Adracus/restpoint.git
+    git:
+      url: git://github.com/Adracus/restpoint.git
+      ref: 527ac55c0ee9b4e28c4d7cb7d0759a483e8a5d4d
   web_components: '>=0.10.1 <0.11.0'
   stack_trace: '1.1.1'
+dev_dependencies:
+  unittest: ">=0.11.5+4 <0.12.0"
+  mock: ">=0.11.0+2 <0.12.0"
 transformers:
 - angular:
     html_files:

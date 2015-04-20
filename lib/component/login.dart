@@ -27,7 +27,8 @@ class LoginComponent implements ScopeAware {
   
   login() {
     if ([username, password].any(isEmpty))
-      return window.alert('Some entry is missing');
+      return scope.emit("alert",
+          new Alert.warning("Username and/or Password blank"));
     
     scope.emit("load", true);
     client.login(username, password).then((token) {

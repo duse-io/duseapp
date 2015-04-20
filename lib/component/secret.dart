@@ -33,7 +33,7 @@ class SecretComponent implements AttachAware, ScopeAware {
     this.client.privateKey = this.privateKey;
     scope.emit("load", true);
     this.client.getDecodedSecret(secret.id).then((secret) {
-      window.alert(secret);
+      window.console.log(secret);
     }).whenComplete(() => scope.emit("load", false));
   }
   
