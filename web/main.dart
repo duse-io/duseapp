@@ -20,10 +20,9 @@ import 'package:duseapp/component/user_list.dart';
 import 'package:duseapp/global.dart';
 
 DuseClient get client {
-  var url = const String.fromEnvironment("DUSE_URL",
-      defaultValue: "https://duse.herokuapp.com/v1");
+  var url = const String.fromEnvironment("DUSE_URL");
   var _client = new DuseClient(
-    Uri.parse("https://duse.herokuapp.com/v1"),
+    Uri.parse(url),
     new ClientClientFactory());
   if (!_client.isLoggedIn) {
     _client.token = window.localStorage["token"];
